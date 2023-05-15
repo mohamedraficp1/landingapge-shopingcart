@@ -1,0 +1,36 @@
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-title {
+  color: #30394a !important;
+  font-weight: 600 !important;
+  font-size: 26px !important;
+  line-height: 28px !important;
+  margin: 0 0 20px !important;
+  text-align: center !important;
+}
+
+.login-input {
+  margin-top: 20px !important;
+  width: 100% !important;
+}
+
+.outer-box {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #0d122b;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  margin: auto;
+}
+
+.login .MuiOutlinedInput-input {
+  color: rgb(0, 0, 0) !important;
+}
