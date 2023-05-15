@@ -31,9 +31,10 @@ function SubscribeSection() {
     background: "#F7A928",
     color: "#fff",
     fontWeight: "500",
-    padding: "10px 25px",
+    padding: "10px 15px",
     marginRight: 5,
-    width: "125px",
+    fontSize: "12px",
+    width: "auto",
     height: "32px",
     "&:hover": {
       background: "#F9BF5E",
@@ -42,7 +43,7 @@ function SubscribeSection() {
 
   const EmailCOntainer = styled(Box)({
     margin: "15px auto 10px",
-    width: 321,
+    width: 299,
   });
 
   return (

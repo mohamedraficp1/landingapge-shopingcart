@@ -17,8 +17,8 @@ export default function TextRating({ value, count }) {
         value={value}
         readOnly
         precision={0.5}
-        icon={<StarIcon style={{ fontSize: "12px" }} />}
-        emptyIcon={<StarIcon style={{ opacity: 0.55, fontSize: "12px" }} />}
+        icon={<StarIcon style={{ fontSize: "15px" }} />}
+        emptyIcon={<StarIcon style={{ opacity: 0.55, fontSize: "15px" }} />}
       />
       <Box sx={{ ml: 1, fontWeight: "600", fontSize: "11px" }}>({count})</Box>
     </Box>

@@ -5,17 +5,20 @@ import CategorySection from "../../components/categorySection";
 import HeroSection from "../../components/heroSection";
 import Products from "../../components/productSection";
 import AppBar from "../../layout/topbar";
+import useCategories from "./useCategory";
 
 function Home() {
+  const [categories, loading] = useCategories();
   return (
-    <Container maxWidth="xl">
+    <>
       <AppBar />
       <HeroSection />
-      <CategorySection />
-      <Products category={"electronics"} />
-      <Products category={"jewelery"} />
+      <CategorySection categories={categories} />
+      {categories?.map((category, i) => (
+        <Products category={category} key={i} />
+      ))}
       <SubscribeSection />
-    </Container>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Alert, Box, Button, Snackbar, Typography } from "@mui/material";
 import TextRating from "../rating";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../redux/action";
@@ -8,11 +8,43 @@ import styled from "@emotion/styled";
 function SingleProduct({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart?.cart);
+  const [state, setState] = React.useState({
+    open: false,
+    severity: "success",
+    message: "",
+  });
+
+  const handleClick = () => {
+    setState({
+      ...state,
+      open: true,
+      message: "Prodct added to Cart",
+      severity: "success",
+    });
+  };
+
+  const handleRemoveCart = () => {
+    setState({
+      ...state,
+      open: true,
+      message: "Prodct removed from Cart",
+      severity: "warning",
+    });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setState({ ...state, open: false });
+  };
 
   const isItemInCart = cart.find((item) => item.id === product.id);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+    handleClick();
     // Store product details in local storage
     const storedProducts = localStorage.getItem("products")
       ? JSON.parse(localStorage.getItem("products"))
@@ -26,6 +58,7 @@ function SingleProduct({ product }) {
 
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(product));
+    handleRemoveCart();
     // Remove product details from local storage
     const storedProducts = localStorage.getItem("products")
       ? JSON.parse(localStorage.getItem("products"))
@@ -41,9 +74,10 @@ function SingleProduct({ product }) {
     background: "#F7A928",
     color: "#fff",
     fontWeight: "500",
-    padding: "10px 25px",
+    padding: "5px 15px",
+    fontSize: "12px",
     width: "auto",
-    marginTop: 20,
+    marginTop: 12,
     "&:hover": {
       background: "#F9BF5E",
     },
@@ -56,6 +90,7 @@ function SingleProduct({ product }) {
         alt={product?.title}
         width="250"
         height="250"
+        className="productImage"
         style={{ objectFit: "contain" }}
       />
       <Typography
@@ -82,7 +117,7 @@ function SingleProduct({ product }) {
         variant="h5"
         fontSize={"17px"}
         color="#4D4F5C"
-        fontWeight={600}
+        fontWeight={500}
         align="left"
       >
         ₹ {product?.price}
@@ -97,6 +132,16 @@ function SingleProduct({ product }) {
           Add to Cart
         </StyledButton>
       )}
+      <Snackbar
+        open={state.open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity={state.severity}>
+          {state?.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

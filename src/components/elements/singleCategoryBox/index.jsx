@@ -15,13 +15,14 @@ function SingleCategoryBox({ color, image, title }) {
 
   const Title = styled(Typography)({
     fontWeight: "600",
-    fontSize: 24,
+    fontSize: 18,
     color: "#fff",
+    textTransform: "capitalize",
   });
   return (
     <OuterBox>
       <Title variant="h4">{title}</Title>
-      <img src={image} width="60" height="40" />
+      <img src={image} width="60" height="40" className="categoryImage" />
     </OuterBox>
   );
 }
