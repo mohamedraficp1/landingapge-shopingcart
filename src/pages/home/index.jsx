@@ -13,7 +13,7 @@ function Home() {
     <>
       <AppBar />
       <HeroSection />
-      <CategorySection categories={categories} />
+      <CategorySection loading={loading} categories={categories} />
       {categories?.map((category, i) => (
         <Products category={category} key={i} />
       ))}
