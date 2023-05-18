@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert, Box, Button, Snackbar, Typography } from "@mui/material";
 import TextRating from "../rating";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../../redux/action";
 import styled from "@emotion/styled";
+import axios from "axios";
 
 function SingleProduct({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart?.cart);
+  const [isItemInCart, setIsItemInCart] = React.useState();
+
+  useEffect(() => {
+    const updatedCartItem = cart.find(
+      (item) => item?.productId === product._id
+    );
+    setIsItemInCart(updatedCartItem);
+    console.log(updatedCartItem, cart, 44);
+  }, [cart, product._id]);
+
   const [state, setState] = React.useState({
     open: false,
     severity: "success",
@@ -40,33 +51,39 @@ function SingleProduct({ product }) {
     setState({ ...state, open: false });
   };
 
-  const isItemInCart = cart.find((item) => item.id === product.id);
+  const apiUrl = import.meta.env.VITE_BASE_URL;
 
-  const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    handleClick();
-    // Store product details in local storage
-    const storedProducts = localStorage.getItem("products")
-      ? JSON.parse(localStorage.getItem("products"))
-      : [];
-
-    localStorage.setItem(
-      "products",
-      JSON.stringify([...storedProducts, product])
-    );
+  const handleAddToCart = async () => {
+    try {
+      const addtoCart = await axios.post(apiUrl + "/addToCart", {
+        productId: product._id,
+        quantity: 1,
+      });
+      const cartData = addtoCart?.data;
+      dispatch(
+        addToCart({ productId: product._id, quantity: 1, _id: cartData._id })
+      );
+      handleClick();
+      console.log(isItemInCart, cart, 88);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleRemoveFromCart = () => {
-    dispatch(removeFromCart(product));
-    handleRemoveCart();
-    // Remove product details from local storage
-    const storedProducts = localStorage.getItem("products")
-      ? JSON.parse(localStorage.getItem("products"))
-      : [];
-    const updatedProducts = storedProducts.filter(
-      (item) => item.id !== product.id
-    );
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
+  const handleRemoveFromCart = async () => {
+    try {
+      const addtoCart = await axios.delete(
+        apiUrl + `/removeFromCart/${isItemInCart._id}`,
+        {
+          productId: product._id,
+          quantity: 1,
+        }
+      );
+      dispatch(removeFromCart(product));
+      handleRemoveCart();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const StyledButton = styled(Button)({
@@ -122,7 +139,7 @@ function SingleProduct({ product }) {
       >
         ₹ {product?.price}
       </Typography>
-      <TextRating value={product?.rating.rate} count={product.rating.count} />
+      <TextRating value={4.4} count={420} />
       {isItemInCart ? (
         <StyledButton variant="contained" onClick={handleRemoveFromCart}>
           Remove from Cart

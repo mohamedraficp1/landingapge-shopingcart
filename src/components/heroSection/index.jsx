@@ -16,6 +16,11 @@ function HeroSection() {
   const Title = styled(Typography)({
     fontWeight: "bold",
     marginBottom: 15,
+    textAlign: "center",
+  });
+
+  const Description = styled(Typography)({
+    textAlign: "center",
   });
 
   const GridItem = styled(Grid)({
@@ -32,7 +37,7 @@ function HeroSection() {
     fontWeight: "500",
     padding: "10px 25px",
     width: "125px",
-    marginTop: 20,
+    margin: "20px auto 0 auto",
     "&:hover": {
       background: "#F9BF5E",
     },
@@ -48,10 +53,10 @@ function HeroSection() {
                 <Title variant="h4" component="h3">
                   X Box for Your Living Room
                 </Title>
-                <Typography variant="body1">
+                <Description variant="body1">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   <br /> Cras egestas eget sem quis congue.
-                </Typography>
+                </Description>
 
                 <StyledButton>Buy Now</StyledButton>
               </GridItem>

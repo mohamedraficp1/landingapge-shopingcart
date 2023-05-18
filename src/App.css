@@ -108,6 +108,21 @@
 .product-box {
   padding: 25px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.productImage {
+  display: flex;
+  flex: 1;
+  margin: 0 auto 20px;
+}
+
+@media all and (max-width: 900px) {
+  .xboxImage {
+    width: 350px !important;
+    display: flex;
+    margin: 25px auto 0 !important;
+  }
 }
 
 @media all and (max-width: 780px) {
@@ -118,12 +133,6 @@
 }
 
 @media all and (max-width: 600px) {
-  .xboxImage {
-    width: 350px !important;
-    margin: 0 auto !important;
-    margin-left: -25px !important;
-  }
-
   .productImage {
     width: 180px !important;
     margin: 0 auto !important;
@@ -139,5 +148,9 @@
   .product-box {
     padding: 12px;
     padding-bottom: 25px;
+  }
+
+  .xboxImage {
+    width: 250px !important;
   }
 }

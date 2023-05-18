@@ -14,13 +14,20 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AdbIcon from "@mui/icons-material/Adb";
 import styled from "@emotion/styled";
 import { Badge } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { initializeCart } from "../redux/action";
 
 const pages = ["Shoes", "Backpack", "Contact Us"];
 
 function TopBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeCart());
+  }, [dispatch]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

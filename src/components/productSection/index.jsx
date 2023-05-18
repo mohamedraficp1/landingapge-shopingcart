@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import SingleProduct from "../elements/singleProduct.jsx";
@@ -9,7 +9,23 @@ function Products({ category }) {
   return (
     <Container maxWidth="xl">
       {loading ? (
-        <p>Loading...</p>
+        <Grid container spacing={6} sx={{ marginTop: "15px" }}>
+          <Grid item md={4} xs={6}>
+            <Skeleton variant="rectangular" height={200} animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+          </Grid>
+          <Grid item md={4} xs={6}>
+            <Skeleton variant="rectangular" height={200} animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+          </Grid>
+          <Grid item md={4} xs={6}>
+            <Skeleton variant="rectangular" height={200} animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+          </Grid>
+        </Grid>
       ) : (
         <Box>
           <Typography variant="h4" className="sectionTitle">
